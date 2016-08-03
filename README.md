@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/SomarDesignStudios/silverstripe-instagram.svg?branch=master)](https://travis-ci.org/SomarDesignStudios/silverstripe-instagram)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/SomarDesignStudios/silverstripe-instagram/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/SomarDesignStudios/silverstripe-instagram/?branch=master)
 
-Add an Instagram gallery to any Page.
+Add an Instagram gallery to any content page.
 
 ## Requirements
 

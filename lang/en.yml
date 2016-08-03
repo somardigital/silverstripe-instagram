@@ -1,0 +1,12 @@
+en:
+  Instagram:
+    ButtonLabelAddAccount: 'Add account'
+    ButtonLabelAuthoriseAccount: 'Authorise account'
+    FieldLabelPages: 'Pages'
+    FieldDescriptionPages: 'Pages this Instagram feed is available on.'
+    FieldLabelTitle: 'Username'
+    FieldDescriptionTitle: 'The Instagram account you want to pull media from.'
+    FieldDropdownEmpty: 'Select...'
+    MessageOAuthErrorResponse: 'Unable to authorise account. Please try again.'
+    MessageOAuthErrorUserConflict: 'Unable to authorise account. Make sure you are logged out of Instagram and your username is spelled correctly.'
+    MessageOAuthSuccess: 'Successfully authorised your account.'

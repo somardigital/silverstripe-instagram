@@ -1,0 +1,5 @@
+---
+Name: instagramconfig
+---
+InstagramAccount:
+  redirect_path: 'admin/instagram/InstagramAccount/OAuth'

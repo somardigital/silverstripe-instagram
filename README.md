@@ -22,4 +22,6 @@ Add an Instagram gallery to any content page.
 
 ## Documentation
 
-See the [docs folder](docs/en/index.md).
+- [Developer docs](docs/en/index.md)
+- [User guide](docs/en/user-guide.md)
+

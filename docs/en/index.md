@@ -53,7 +53,7 @@ __mysite/_config.php__
 ShortcodeParser::get('default')
   ->register('instagram', ['InstagramPageExtension', 'instagramShortcodeHandler']);
 
-HtmlEditorConfig::get('cms')->insertButtonsAfter('instagramButton');
+HtmlEditorConfig::get('cms')->insertButtonsAfter('fullscreen', 'instagramButton');
 HtmlEditorConfig::get('cms')->enablePlugins([
   'instagramButton' => '../../../silverstripe-instagram/javascript/instagramPlugin.js',
 ]);

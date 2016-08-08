@@ -136,23 +136,122 @@ class InstagramAccountTest extends SapphireTest
         $mock->updateAccessToken($validToken, 'state');
     }
 
-    public function testGetNewInstagramClient()
-    {
-
-    }
-
     public function testGetOAuthStateValueFromLoginURL()
     {
+        $instagramAccount = new InstagramAccount();
 
+        /*
+         * Should return null if no URL is passed.
+         */
+        $this->assertEquals(null, $instagramAccount->getOAuthStateValueFromLoginURL());
+
+        /*
+         * Should return null if there's no "state" query string.
+         */
+        $this->assertEquals(
+            null,
+            $instagramAccount->getOAuthStateValueFromLoginURL(
+                'http://example.com/admin/admin/instagram/InstagramAccount/OAuth?code=123'
+            )
+        );
+
+        /*
+         * Should return the value of the "state" query string if it exists.
+         */
+        $this->assertEquals(
+            'abc',
+            $instagramAccount->getOAuthStateValueFromLoginURL(
+                'http://example.com/admin/admin/instagram/InstagramAccount/OAuth?code=123&state=abc'
+            )
+        );
     }
 
-    public function testGetSessionOAuthState()
+    public function testIsValidMediaID()
     {
+        /*
+         * Should return false if no media ID is passed.
+         */
+        $instagramAccount = new InstagramAccount();
 
-    }
+        $this->assertEquals(false, $instagramAccount->isValidMediaID());
 
-    public function testSetSessionOAuthState()
-    {
+        /*
+         * Should return false if the account ID is unavailable.
+         */
+        $mock = $this->getNewInstagramAccountMock()->makePartial();
+        $mock
+            ->shouldReceive('getInstagramID')
+            ->withNoArgs()
+            ->andReturn(null);
 
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('123456789012345678_123')
+        );
+
+        /*
+         * Should return false if the media ID is less than 18 digits.
+         */
+        $mock = $this->getNewInstagramAccountMock()->makePartial();
+        $mock
+            ->shouldReceive('getInstagramID')
+            ->withNoArgs()
+            ->andReturn('123');
+
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('12345678901234567_123')
+        );
+
+        /*
+         * Should return false if the media ID is greater than 19 digits.
+         */
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('12345678901234567890_123')
+        );
+
+        /*
+         * Should return false if the media ID length is valid but contains non-digits.
+         */
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('123456789Z12345678_123')
+        );
+
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('123456789&12345678_123')
+        );
+
+        /*
+         * Should return false if a valid media ID is not followed by an underscore.
+         */
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('123456789012345678-123')
+        );
+
+        /*
+         * Should return false if the media ID doesn't end with the account ID.
+         */
+        $this->assertEquals(
+            false,
+            $mock->isValidMediaID('123456789012345678_321')
+        );
+
+        /*
+         * Should return true if the media ID is 18 or 19 characters followed by
+         * an underscore and the account ID.
+         */
+        $this->assertEquals(
+            true,
+            $mock->isValidMediaID('123456789012345678_123')
+        );
+
+        $this->assertEquals(
+            true,
+            $mock->isValidMediaID('1234567890123456789_123')
+        );
     }
 }

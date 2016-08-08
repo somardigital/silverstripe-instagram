@@ -188,12 +188,12 @@ class InstagramAccount extends DataObject
     }
 
     /**
-     * Gets the 'state' value from an AOuth login URL.
+     * Gets the 'state' value from an OAuth login URL.
      *
      * @param string $loginURL
      * @return string|null
      */
-    private function getOAuthStateValueFromLoginURL($loginURL = null)
+    public function getOAuthStateValueFromLoginURL($loginURL = null)
     {
         if (!$loginURL) {
             return null;
@@ -243,9 +243,9 @@ class InstagramAccount extends DataObject
      * @param string $mediaID
      * @return boolean
      */
-    public function isValidMediaID($mediaID)
+    public function isValidMediaID($mediaID = null)
     {
-        if (!$instagramID = $this->getInstagramID()) {
+        if (!$mediaID || !$instagramID = $this->getInstagramID()) {
             return false;
         }
 
